@@ -6,7 +6,7 @@ public class Exercicio_9 {
         Info info[] = new Info[150];
         int tam = 2, a, b, c;
         for (int i = 0; i < tam; i++) {
-            LimparTela.limpar("Aperte [ENTER] para continuar... ");
+            LimparTela.limpar("😎💻Aperte [ENTER] para continuar... ");
             System.out.print("Digite o 1º número: ");
             a = entrada.nextInt();
             System.out.print("Digite o 2º número: ");

@@ -55,7 +55,6 @@ public class Batalha {
             if (bloco!= null && bloco.isSolido()) {
                 System.out.println("Jogador 1 atacou o bloco (" + (x+1) + "," + (y+1) + ")");
                 bloco.setSolido(false);
-                if (bloco.isDestruid
+            }
     }
-
 }

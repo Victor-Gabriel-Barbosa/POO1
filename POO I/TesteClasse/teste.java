@@ -1,6 +1,6 @@
-public class TESTECLASSE {
-}
-    public static void main(String[] var0) {
+public class teste {
+    public static void main(String[] args) {
        System.out.println("I Rule!");
        System.out.println("The World");
     }
+}
