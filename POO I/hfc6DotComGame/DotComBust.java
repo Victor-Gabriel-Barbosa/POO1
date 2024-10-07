@@ -1,4 +1,3 @@
-import helper.GameHelper;
 import java.util.List;
 import java.util.ArrayList;
 // Declarar classe DotComBust, responsável pela lógica do jogo
@@ -37,12 +36,12 @@ public class DotComBust {
       DotCom hitted = null;
       for(DotCom dotcom : dotcoms) {
         result = dotcom.checkYourself(jogada);
-        if (result != "miss") {
+        if (!result.equals("miss")) {
           hitted = dotcom;
           break;
         }
       }
-      if (result == "kill") {
+      if (result.equals("kill")) {
         dotcoms.remove(hitted);
       }
       System.out.printf("Resultado: %s\n\n", result);    

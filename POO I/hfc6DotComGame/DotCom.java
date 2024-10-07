@@ -15,7 +15,7 @@ public class DotCom {
         break;
       }
     }
-    if (result == "hit") {
+    if ("hit".equals(result)) {
       locationCells.remove(guess);
     }
     if (locationCells.isEmpty()) {
