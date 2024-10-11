@@ -5,4 +5,4 @@ public class Main {
     game.setup();
     game.start();
   }
-}
+} 
