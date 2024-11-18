@@ -1,8 +1,20 @@
-import javax.swing.*; // 📦 Importa as bibliotecas necessárias para criar a interface gráfica
-import java.awt.*; // 📦 Importa classes para gerenciamento de layout e cores
-import java.io.*; // 📂 Importa as classes para trabalhar com arquivos
-import java.util.List; // 📦 Importa a lista para armazenar as artes
-import java.util.ArrayList; // 📦 Importa a classe ArrayList
+import java.awt.GridLayout; // 📦 Importa as bibliotecas necessárias para criar a interface gráfica
+import java.io.File; // 📦 Importa classes para gerenciamento de layout e cores
+import java.io.FileOutputStream; // 📂 Importa as classes para trabalhar com arquivos
+import java.io.IOException; // 📦 Importa a lista para armazenar as artes
+import java.io.ObjectOutputStream; // 📦 Importa a classe ArrayList
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class JanelaAdicionarArte extends JFrame { // 🖥️ Classe que representa a janela para adicionar uma nova arte
   private JTextField campoTitulo; // ✍️ Campo de texto para o título da arte
@@ -60,15 +72,14 @@ public class JanelaAdicionarArte extends JFrame { // 🖥️ Classe que represen
     add(painelForm); // 📥 Adiciona o painel com os campos ao corpo da janela
   }
 
-  private void abrirFileChooser() { // 🔄 Método para abrir o seletor de arquivos
-    JFileChooser fileChooser = new JFileChooser(); // 🗂️ Cria o seletor de arquivos
-    fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY); // 📂 Permite selecionar apenas arquivos
-    int resultado = fileChooser.showOpenDialog(this); // ⚙️ Exibe a caixa de diálogo para abrir um arquivo
-    if (resultado == JFileChooser.APPROVE_OPTION) { // ✅ Verifica se o usuário aprovou a seleção
-      File arquivoSelecionado = fileChooser.getSelectedFile(); // 📝 Obtém o arquivo selecionado
-      String diretorioBase = new File("").getAbsolutePath(); // 📂 Obtém o diretório base (diretório atual do projeto)
-      String caminhoRelativo = arquivoSelecionado.getAbsolutePath().substring(diretorioBase.length() + 1); // Calcula o caminho relativo
-      campoImagemCaminho.setText(caminhoRelativo); // 🖼️ Preenche o campo com o caminho relativo
+  private void abrirFileChooser() {
+    JFileChooser fileChooser = new JFileChooser(); // Cria o seletor de arquivos
+    fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY); // Permite selecionar apenas arquivos
+    int resultado = fileChooser.showOpenDialog(this); // Exibe a caixa de diálogo para abrir um arquivo
+    if (resultado == JFileChooser.APPROVE_OPTION) { // Verifica se o usuário aprovou a seleção
+        File arquivoSelecionado = fileChooser.getSelectedFile(); // Obtém o arquivo selecionado
+        String caminhoAbsoluto = arquivoSelecionado.getAbsolutePath(); // Obtém o caminho absoluto
+        campoImagemCaminho.setText(caminhoAbsoluto); // Preenche o campo com o caminho absoluto
     }
   }
 

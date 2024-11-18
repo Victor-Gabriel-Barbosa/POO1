@@ -1,7 +1,10 @@
-import java.io.*; // 📦 Importa classes necessárias para manipulação de arquivos e serialização
-import java.util.ArrayList; // 📦 Importa a classe ArrayList para manipulação de listas dinâmicas
-import java.util.List; // 📦 Importa a interface List para representar listas
-import java.util.stream.Collectors; // 📦 Importa Collectors para operações de stream (filtragem, coleta)
+import java.io.File; // 📦 Importa classes necessárias para manipulação de arquivos e serialização
+import java.io.FileInputStream; // 📦 Importa a classe ArrayList para manipulação de listas dinâmicas
+import java.io.IOException; // 📦 Importa a interface List para representar listas
+import java.io.ObjectInputStream; // 📦 Importa Collectors para operações de stream (filtragem, coleta)
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Galeria { // 🖼️ Classe que representa uma galeria de artes
   private List<Arte> artes; // 🖼️ Lista que armazena as artes na galeria
@@ -46,8 +49,9 @@ public class Galeria { // 🖼️ Classe que representa uma galeria de artes
   // 🖼️ Método privado que inicializa a galeria com algumas artes de exemplo
   private void inicializarArtes() {
     // 🎨 Exemplo de artes a serem adicionadas à galeria
-    adicionarArte(new Arte("Catedral de Notre-Dame de Reims, França", "Eugène Viollet-le-Duc", "Dedicada à Virgem Maria, a Catedral de Notre Dame é uma das catedrais góticas mais antigas do mundo", "src/main/java/recursos/gotico_imagens/acapa-1.png", "Gótica"));
-    adicionarArte(new Arte("F. Champenois Imprimeur-Éditeur", "Alfons Mucha", "“Champenois” é uma das obras mais conhecidas do artista tcheco Alphonse Mucha, um dos principais representantes do movimento Art Nouveau. Mucha era conhecido por suas pinturas, cartazes e ilustrações que celebravam a beleza feminina, o esplendor da natureza e a estética ornamental.", "src/main/java/recursos/nouveau_imagens/artnouveau-capa.png", "Nouveau"));
+    adicionarArte(new Arte("Catedral de Notre-Dame de Reims, França", "Eugène Viollet-le-Duc", "Dedicada à Virgem Maria, a Catedral de Notre Dame é uma das catedrais góticas mais antigas do mundo", "C:\\Users\\usuario\\Desktop\\Programas\\POO_1\\POO I\\Trabalho-POO\\src\\main\\java\\recursos\\gotico_imagens\\acapa-1.png", "Gótica"));
+    adicionarArte(new Arte("F. Champenois Imprimeur-Éditeur", "Alfons Mucha", "“Champenois” é uma das obras mais conhecidas do artista tcheco Alphonse Mucha, um dos principais representantes do movimento Art Nouveau. Mucha era conhecido por suas pinturas, cartazes e ilustrações que celebravam a beleza feminina, o esplendor da natureza e a estética ornamental.", "C:\\Users\\usuario\\Desktop\\Programas\\POO_1\\POO I\\Trabalho-POO\\src\\main\\java\\recursos\\n" + //
+            "ouveau_imagens\\artnouveau-capa.png", "Nouveau"));
   }
 
   private List<Arte> carregarArtesDeArquivo(String caminhoArquivo) {
