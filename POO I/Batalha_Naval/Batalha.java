@@ -1,10 +1,8 @@
-package POO I.Batalha_Naval;
-
 public class Batalha {
     private Jogador jogador1;
     private Jogador jogador2;
     private CampoDeJogo campo;
-    
+
     public Batalha(Jogador jogador1, Jogador jogador2) {
         this.jogador1 = jogador1;
         this.jogador2 = jogador2;
@@ -22,7 +20,7 @@ public class Batalha {
         System.out.println("Iniciando a batalha...");
         System.out.println("--------------------------------");
         LimparTela.limpar("Aperte [ENTER] para iniciar...");
-        while (!jogador1.isMorto() &&!jogador2.isMorto()) {
+        while (!jogador1.isMorto() && !jogador2.isMorto()) {
             // Jogador 1 atacar
             System.out.println("--------------------------------");
             System.out.println("Jogador 1: " + jogador1.getNome());
@@ -32,8 +30,8 @@ public class Batalha {
             int x = GeradorAleatorio.gerarNumero(0, 9);
             int y = GeradorAleatorio.gerarNumero(0, 9);
             Bloco bloco = campo.getBloco(x, y);
-            if (bloco!= null && bloco.isSolido()) {
-                System.out.println("Jogador 2 atacou o bloco (" + (x+1) + "," + (y+1) + ")");
+            if (bloco != null && bloco.isSolido()) {
+                System.out.println("Jogador 2 atacou o bloco (" + (x + 1) + "," + (y + 1) + ")");
                 bloco.setSolido(false);
                 if (bloco.isDestruido()) {
                     jogador2.perderVida();
@@ -52,9 +50,10 @@ public class Batalha {
             x = GeradorAleatorio.gerarNumero(0, 9);
             y = GeradorAleatorio.gerarNumero(0, 9);
             bloco = campo.getBloco(x, y);
-            if (bloco!= null && bloco.isSolido()) {
-                System.out.println("Jogador 1 atacou o bloco (" + (x+1) + "," + (y+1) + ")");
+            if (bloco != null && bloco.isSolido()) {
+                System.out.println("Jogador 1 atacou o bloco (" + (x + 1) + "," + (y + 1) + ")");
                 bloco.setSolido(false);
             }
+        }
     }
 }

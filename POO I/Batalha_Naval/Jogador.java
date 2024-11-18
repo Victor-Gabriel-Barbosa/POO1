@@ -1,5 +1,3 @@
-package POO I.Batalha_Naval;
-
 public class Jogador {
     private String nome;
     private int vidas;
