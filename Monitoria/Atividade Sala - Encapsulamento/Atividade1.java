@@ -8,28 +8,28 @@ class Funcionario {
   private String secao;
 
   // Construtor padrão - inicializa com valores vazios
-  Funcionario() {
+  public Funcionario() {
     nome = "";
     salario = 0;
     secao = "";
   }
 
   // Construtor completo com todos os atributos
-  Funcionario(String nome, double salario, String secao) {
+  public Funcionario(String nome, double salario, String secao) {
     this.nome = nome;
     this.salario = salario;
     this.secao = secao;
   }
 
   // Construtor parcial - sem seção
-  Funcionario(String nome, double salario) {
+  public Funcionario(String nome, double salario) {
     this.nome = nome;
     this.salario = salario;
     this.secao = "";
   }
 
   // Construtor parcial - apenas nome
-  Funcionario(String nome) {
+  public Funcionario(String nome) {
     this.nome = nome;
     this.salario = 0;
     this.secao = "";
@@ -48,7 +48,11 @@ class Funcionario {
   }
 
   public void setNome(String nome) {
-    this.nome = nome;
+    if (nome != null && !nome.isEmpty()) {
+      this.nome = nome;
+    } else {
+      System.out.println("Nome inválido!");
+    }
   }
 
   public double getSalario() {
@@ -56,7 +60,11 @@ class Funcionario {
   }
 
   public void setSalario(double salario) {
-    this.salario = salario;
+    if (salario >= 0) {
+      this.salario = salario;
+    } else {
+      System.out.println("Salário inválido!");
+    }
   }
 
   public String getSecao() {
@@ -64,7 +72,11 @@ class Funcionario {
   }
   
   public void setSecao(String secao) {
-    this.secao = secao;
+    if (secao!= null && !secao.isEmpty()) {
+      this.secao = secao;
+    } else {
+      System.out.println("Secção inválida!");
+    }
   }
 }
 

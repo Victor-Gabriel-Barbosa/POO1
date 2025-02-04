@@ -3,7 +3,7 @@
  * onde 'a' é a parte real e 'b' é a parte imaginária
  */
 class NComplexo {
-  private double real, img;
+  public double real, img;
 
   // Construtor padrão - inicializa com zero
   public NComplexo() {
@@ -27,7 +27,11 @@ class NComplexo {
   }
 
   public void setReal(double real) {
-    this.real = real;
+    if (real != 0) {
+      this.real = real;
+    } else {
+      System.out.println("Parte real inválida!");
+    }
   }
 
   public double getImg() {
@@ -35,7 +39,11 @@ class NComplexo {
   }
 
   public void setImg(double img) {
-    this.img = img;
+    if (img != 0) {
+      this.img = img;
+    } else {
+      System.out.println("Parte imaginária inválida!");
+    }
   }
 
   /**

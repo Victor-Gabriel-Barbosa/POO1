@@ -1,7 +1,6 @@
 
 /** Classe que representa uma conta bancária com operações básicas */
 class Conta {
-
   // Atributos privados para encapsulamento
   private String Nome;
   private double Saldo;
@@ -20,7 +19,11 @@ class Conta {
    * @param valor Quantia a ser depositada
    */
   public void deposita(double valor) {
-    Saldo += valor;
+    if (valor > 0) {
+      Saldo += valor;
+    } else {
+      System.out.println("Valor inválido para depósito!");
+    }
   }
 
   /**
@@ -54,12 +57,20 @@ class Conta {
     return Saldo;
   }
 
-  public void setNome(String nome) {
-    Nome = nome;
+  public void setNome(String Nome) {
+    if (Nome != null && !Nome.isEmpty()) {
+      this.Nome = Nome;
+    } else {
+      System.out.println("Nome inválido!");
+    }
   }
 
-  public void setSaldo(double saldo) {
-    Saldo = saldo;
+  public void setSaldo(double Saldo) {
+    if (Saldo >= 0) {
+      this.Saldo = Saldo;
+    } else {
+      System.out.println("Saldo inválido!");
+    }
   }
 }
 
