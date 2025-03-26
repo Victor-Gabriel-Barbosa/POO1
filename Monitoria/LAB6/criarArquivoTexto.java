@@ -1,6 +1,8 @@
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.Formatter;
 import java.util.FormatterClosedException;
+
 import javax.swing.JOptionPane;
 
 public class criarArquivoTexto {
@@ -10,7 +12,7 @@ public class criarArquivoTexto {
   // Abre arquivo "clientes.txt"
   public boolean abrirArquivo() {
     try {
-      saida = new Formatter("clientes.txt");
+      saida = new Formatter(new FileOutputStream("clientes.txt", true));
       arquivoAberto = true;
       return true;
     } catch (SecurityException securityException) {
