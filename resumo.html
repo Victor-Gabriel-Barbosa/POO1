@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POO 1: Try-Catch, Gerenciamento de Arquivos e Swing</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #333;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+
+    .slide {
+      background-color: white;
+      margin: 20px auto;
+      padding: 30px;
+      max-width: 900px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .slide-content {
+      padding: 10px;
+    }
+
+    h1,
+    h2,
+    h3 {
+      color: #2c3e50;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 20px 0;
+      margin: 0;
+      font-size: 2.5em;
+      border-bottom: 2px solid #3498db;
+    }
+
+    h2 {
+      padding: 15px 0;
+      margin-top: 30px;
+      font-size: 1.8em;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    h3 {
+      font-size: 1.3em;
+      color: #3498db;
+    }
+
+    code {
+      background-color: #f8f8f8;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-family: Consolas, monospace;
+    }
+
+    pre {
+      background-color: #f8f8f8;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 15px;
+      overflow-x: auto;
+      font-family: Consolas, monospace;
+      line-height: 1.4;
+      white-space: pre;      /* Adicionado para preservar quebras de linha */
+    }
+
+    .code-block {
+      background-color: #2c3e50;
+      color: #ecf0f1;
+      border-radius: 4px;
+      padding: 15px;
+      margin: 20px 0;
+      overflow-x: auto;
+      font-family: Consolas, monospace;
+      line-height: 1.4;
+      white-space: pre;      /* Adicionado para preservar quebras de linha */
+      tab-size: 2;           /* Define o tamanho das tabulações */
+      -moz-tab-size: 2;      /* Para compatibilidade com Firefox */
+    }
+
+    .highlight {
+      background-color: #ffeaa7;
+      padding: 2px;
+    }
+
+    ul,
+    ol {
+      padding-left: 25px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .two-column {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .column {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .note {
+      background-color: #e3f2fd;
+      border-left: 4px solid #2196F3;
+      padding: 10px 15px;
+      margin: 20px 0;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .warning {
+      background-color: #fff8e1;
+      border-left: 4px solid #ffc107;
+      padding: 10px 15px;
+      margin: 20px 0;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .controls {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 0 5px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .center-image {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .center-image img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    #slide-counter {
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slides-container">
+    <!-- Slide 1: Capa -->
+    <div class="slide" id="slide-1">
+      <div class="slide-content">
+        <h1>Programação Orientada a Objetos 1</h1>
+        <div style="text-align: center; margin: 60px 0;">
+          <h2 style="border-bottom: none;">Try-Catch, Gerenciamento de Arquivos e Interface Gráfica Swing</h2>
+          <p style="font-size: 1.2em; margin-top: 60px;">Victor</p>
+          <p style="font-size: 1.1em;">Data: 24/04/2025</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: Conteúdo -->
+    <div class="slide" id="slide-2">
+      <div class="slide-content">
+        <h2>Conteúdo da Apresentação</h2>
+        <ol>
+          <li><strong>Tratamento de Exceções (Try-Catch)</strong>
+            <ul>
+              <li>Conceitos fundamentais</li>
+              <li>Hierarquia de exceções</li>
+              <li>Bloco try-catch-finally</li>
+              <li>Exceções personalizadas</li>
+            </ul>
+          </li>
+          <li><strong>Gerenciamento de Arquivos</strong>
+            <ul>
+              <li>Classes para manipulação de arquivos</li>
+              <li>Leitura e escrita</li>
+              <li>Try-with-resources</li>
+              <li>Serialização de objetos</li>
+            </ul>
+          </li>
+          <li><strong>Interface Gráfica com Swing</strong>
+            <ul>
+              <li>Componentes básicos</li>
+              <li>Layout Managers</li>
+              <li>Tratamento de eventos</li>
+              <li>Combinando com arquivos e exceções</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- Parte 1: Tratamento de Exceções -->
+    <!-- Slide 3: Introdução a Exceções -->
+    <div class="slide" id="slide-3">
+      <div class="slide-content">
+        <h2>1. Tratamento de Exceções</h2>
+        <h3>O que são exceções?</h3>
+        <p>Exceções são eventos que ocorrem durante a execução de um programa e que interrompem o fluxo normal de
+          instruções.</p>
+
+        <div>
+          <div class="column">
+            <h3>Por que usar exceções?</h3>
+            <ul>
+              <li>Separar o código de tratamento de erros do código principal</li>
+              <li>Propagar erros para cima na pilha de chamadas</li>
+              <li>Agrupar e diferenciar tipos de erros</li>
+              <li>Garantir que recursos sejam liberados corretamente</li>
+            </ul>
+          </div>
+          <div class="column">
+            <div class="center-image">
+              <img src="https://arquivo.devmedia.com.br/artigos/Thiago_Varallo/Excecoes_Java/Excecoes_Java2.jpg"
+                alt="Diagrama conceitual de exceções" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Hierarquia de Exceções -->
+    <div class="slide" id="slide-4">
+      <div class="slide-content">
+        <h2>Hierarquia de Exceções em Java</h2>
+
+        <div class="center-image">
+          <img src="https://www.universidadejava.com.br/images/2020-05-14-java-excecoes.png"
+            alt="Hierarquia de exceções em Java" />
+        </div>
+
+        <div>
+          <div class="column">
+            <h3>Checked Exceptions</h3>
+            <ul>
+              <li>Verificadas em tempo de compilação</li>
+              <li>Obrigam o programador a tratá-las</li>
+              <li>Exemplo: IOException, SQLException</li>
+            </ul>
+          </div>
+          <div class="column">
+            <h3>Unchecked Exceptions</h3>
+            <ul>
+              <li>Não verificadas em tempo de compilação</li>
+              <li>Derivadas de RuntimeException</li>
+              <li>Exemplo: NullPointerException, ArrayIndexOutOfBoundsException</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5: Blocos Try-Catch -->
+    <div class="slide" id="slide-5">
+      <div class="slide-content">
+        <h2>Blocos Try-Catch</h2>
+        <p>Estrutura básica para tratamento de exceções:</p>
+
+        <div class="code-block">
+          try {
+            // Código que pode gerar exceção
+            int resultado = 10 / 0; // ArithmeticException
+          } catch (ArithmeticException e) {
+            // Tratamento para ArithmeticException
+            System.out.println("Erro: Divisão por zero!");
+            e.printStackTrace();
+          } catch (Exception e) {
+            // Tratamento genérico para outras exceções
+            System.out.println("Ocorreu um erro: " + e.getMessage());
+          } finally {
+            // Código que sempre será executado
+            System.out.println("Finalizando operação...");
+          }
+        </div>
+
+        <div class="note">
+          <strong>Nota:</strong> O bloco <code>finally</code> é opcional, mas muito útil para garantir que recursos
+          sejam liberados, independentemente de ocorrer ou não uma exceção.
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: Multi-catch e Try-with-resources -->
+    <div class="slide" id="slide-6">
+      <div class="slide-content">
+        <h2>Recursos Avançados de Try-Catch</h2>
+
+        <h3>Multi-catch (Java 7+)</h3>
+        <div class="code-block">
+          try {
+            // Código que pode gerar diferentes exceções
+          } catch (IOException | SQLException e) {
+            // Tratamento comum para ambas as exceções
+            System.out.println("Erro de I/O ou banco de dados: " + e.getMessage());
+          }
+        </div>
+
+        <h3>Try-with-resources (Java 7+)</h3>
+        <div class="code-block">
+          // Automaticamente fecha recursos que implementam AutoCloseable
+          try (FileInputStream fis = new FileInputStream("arquivo.txt");
+          BufferedReader br = new BufferedReader(new InputStreamReader(fis))) {
+
+            String linha;
+            while ((linha = br.readLine()) != null) {
+              System.out.println(linha);
+            }
+
+          } catch (IOException e) {
+            System.err.println("Erro ao ler arquivo: " + e.getMessage());
+          }
+          // Não é necessário bloco finally para fechar recursos!
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 7: Exceções Personalizadas -->
+    <div class="slide" id="slide-7">
+      <div class="slide-content">
+        <h2>Criando Exceções Personalizadas</h2>
+
+        <div>
+          <div class="column">
+            <p>É possível criar suas próprias classes de exceção para representar erros específicos do seu domínio de
+              aplicação:</p>
+
+            <div class="code-block">
+              // Criando uma exceção checada
+              public class SaldoInsuficienteException
+              extends Exception {
+
+                private double saldoAtual;
+                private double valorSaque;
+
+                public SaldoInsuficienteException(
+                double saldoAtual,
+                double valorSaque) {
+                  super("Saldo insuficiente: " +
+                  saldoAtual + ", Saque: " + valorSaque);
+                  this.saldoAtual = saldoAtual;
+                  this.valorSaque = valorSaque;
+                }
+
+                public double getSaldoAtual() {
+                  return saldoAtual;
+                }
+
+                public double getValorSaque() {
+                  return valorSaque;
+                }
+              }
+            </div>
+          </div>
+          <div class="column">
+            <p>Usando a exceção personalizada:</p>
+
+            <div class="code-block">
+              public class ContaBancaria {
+                private double saldo;
+
+                public void sacar(double valor)
+                throws SaldoInsuficienteException {
+                  if (valor > saldo) {
+                    throw new SaldoInsuficienteException(saldo, valor);
+                  }
+                  saldo -= valor;
+                }
+
+                // Exemplo de uso
+                public static void main(String[] args) {
+                  ContaBancaria conta = new ContaBancaria();
+                  try {
+                    conta.sacar(100.0);
+                  } catch (SaldoInsuficienteException e) {
+                    System.out.println(e.getMessage());
+                    // Acesso aos dados específicos
+                    System.out.println("Saldo: " +
+                    e.getSaldoAtual());
+                  }
+                }
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parte 2: Gerenciamento de Arquivos -->
+    <!-- Slide 8: Introdução a Manipulação de Arquivos -->
+    <div class="slide" id="slide-8">
+      <div class="slide-content">
+        <h2>2. Gerenciamento de Arquivos</h2>
+
+        <h3>Classes principais para manipulação de arquivos</h3>
+        <div>
+          <div class="column">
+            <h4>java.io (Clássico)</h4>
+            <ul>
+              <li><code>File</code>: representação de arquivos e diretórios</li>
+              <li><code>FileInputStream</code>/<code>FileOutputStream</code>: operações com bytes</li>
+              <li><code>FileReader</code>/<code>FileWriter</code>: operações com caracteres</li>
+              <li><code>BufferedReader</code>/<code>BufferedWriter</code>: operações bufferizadas</li>
+            </ul>
+          </div>
+          <div class="column">
+            <h4>java.nio (Java 7+)</h4>
+            <ul>
+              <li><code>Path</code>: representação moderna de arquivos</li>
+              <li><code>Files</code>: classe utilitária com métodos estáticos</li>
+              <li><code>Charset</code>: representação de conjuntos de caracteres</li>
+              <li>APIs não bloqueantes para operações de I/O</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="note">
+          <strong>Observação:</strong> Operações com arquivos geralmente exigem tratamento de exceções, pois são
+          frequentes fontes de erros em aplicações.
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 9: Leitura de Arquivos -->
+    <div class="slide" id="slide-9">
+      <div class="slide-content">
+        <h2>Leitura de Arquivos</h2>
+
+        <div>
+          <div class="column">
+            <h3>Com java.io</h3>
+            <div class="code-block">
+              try (FileReader fr = new FileReader("dados.txt");
+                BufferedReader br = new BufferedReader(fr)) {
+
+                String linha;
+                while ((linha = br.readLine()) != null) {
+                  System.out.println(linha);
+                }
+
+              } catch (IOException e) {
+                System.err.println("Erro ao ler arquivo: " + e.getMessage());
+              }
+            </div>
+          </div>
+          <div class="column">
+            <h3>Com java.nio (Java 7+)</h3>
+            <div class="code-block">
+              try {
+                Path path = Paths.get("dados.txt");
+
+                // Lendo todas as linhas de uma vez
+                List<String> linhas = Files.readAllLines(
+                path, StandardCharsets.UTF_8);
+
+                for (String linha : linhas) {
+                  System.out.println(linha);
+                }
+
+                // Ou usando streams (Java 8+)
+                Files.lines(path, StandardCharsets.UTF_8)
+                .forEach(System.out::println);
+
+              } catch (IOException e) {
+                System.err.println("Erro: " + e.getMessage());
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 10: Escrita em Arquivos -->
+    <div class="slide" id="slide-10">
+      <div class="slide-content">
+        <h2>Escrita em Arquivos</h2>
+
+        <div>
+          <div class="column">
+            <h3>Com java.io</h3>
+            <div class="code-block">
+              try (FileWriter fw = new FileWriter("saida.txt");
+              BufferedWriter bw = new BufferedWriter(fw)) {
+
+                bw.write("Primeira linha de texto");
+                bw.newLine(); // Quebra de linha
+                bw.write("Segunda linha de texto");
+                bw.flush(); // Força a escrita dos dados
+
+              } catch (IOException e) {
+                System.err.println("Erro ao escrever: " +
+                e.getMessage());
+              }
+            </div>
+          </div>
+          <div class="column">
+            <h3>Com java.nio (Java 7+)</h3>
+            <div class="code-block">
+              try {
+                Path path = Paths.get("saida.txt");
+
+                // Escrevendo uma lista de strings
+                List<String> linhas = Arrays.asList(
+                  "Primeira linha de texto",
+                  "Segunda linha de texto"
+                );
+
+                Files.write(path, linhas,
+                StandardCharsets.UTF_8,
+                StandardOpenOption.CREATE,
+                StandardOpenOption.WRITE);
+
+              } catch (IOException e) {
+                System.err.println("Erro: " + e.getMessage());
+              }
+            </div>
+          </div>
+        </div>
+
+        <div class="warning">
+          <strong>Atenção:</strong> Por padrão, o método <code>write</code> sobrescreve arquivos existentes. Para
+          preservar conteúdo ou acrescentar texto, use o <code>FileWriter("arquivo.txt", true)</code> ou
+          <code>StandardOpenOption.APPEND</code>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 11: Serialização de Objetos -->
+    <div class="slide" id="slide-11">
+      <div class="slide-content">
+        <h2>Serialização de Objetos</h2>
+
+        <p>Serialização é o processo de converter objetos em um formato que pode ser salvo em disco ou transmitido pela
+          rede.</p>
+
+        <div>
+          <div class="column">
+            <h3>Criando uma classe serializável</h3>
+            <div class="code-block">
+              import java.io.Serializable;
+
+              public class Pessoa implements Serializable {
+                // Recomendado para controle de versão
+                private static final long serialVersionUID = 1L;
+
+                private String nome;
+                private int idade;
+                private transient String senhaTemporaria;
+
+                // Construtores, getters e setters
+
+                @Override
+                public String toString() {
+                  return "Pessoa [nome=" + nome + ", idade=" + idade + "]";
+                }
+              }
+            </div>
+          </div>
+          <div class="column">
+            <h3>Salvando e carregando objetos</h3>
+            <div class="code-block">
+              // Salvando objeto
+              try (FileOutputStream fos =
+              new FileOutputStream("pessoa.ser");
+              ObjectOutputStream oos =
+              new ObjectOutputStream(fos)) {
+
+                Pessoa p = new Pessoa("João", 30);
+                oos.writeObject(p);
+
+                } catch (IOException e) {
+                  e.printStackTrace();
+                }
+
+                // Carregando objeto
+                try (FileInputStream fis =
+                new FileInputStream("pessoa.ser");
+                ObjectInputStream ois =
+                new ObjectInputStream(fis)) {
+
+                Pessoa p = (Pessoa) ois.readObject();
+                System.out.println(p);
+
+              } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+              }
+            </div>
+          </div>
+        </div>
+
+        <div class="note">
+          <strong>Nota:</strong> O modificador <code>transient</code> indica que um atributo não deve ser serializado.
+        </div>
+      </div>
+    </div>
+
+    <!-- Parte 3: Interface Gráfica com Swing -->
+    <!-- Slide 12: Introdução ao Swing -->
+    <div class="slide" id="slide-12">
+      <div class="slide-content">
+        <h2>3. Interface Gráfica com Swing</h2>
+
+        <div>
+          <div class="column">
+            <h3>O que é Swing?</h3>
+            <ul>
+              <li>Biblioteca Java para criação de interfaces gráficas</li>
+              <li>Parte do JFC (Java Foundation Classes)</li>
+              <li>Implementa o padrão MVC (Model-View-Controller)</li>
+              <li>Oferece componentes GUI leves e portáveis</li>
+              <li>Altamente customizável com Look and Feel</li>
+            </ul>
+
+            <h3>Componentes principais</h3>
+            <ul>
+              <li>Contêineres: JFrame, JPanel, JDialog</li>
+              <li>Controles: JButton, JTextField, JComboBox</li>
+              <li>Menus: JMenuBar, JMenu, JMenuItem</li>
+              <li>Layout Managers para organização dos componentes</li>
+            </ul>
+          </div>
+          <div class="column">
+            <div class="center-image">
+              <img src="https://sae.unb.br/cae/conteudo/unbfga/oo/imagens/swing_figura1.jpg" alt="Componentes Swing" />
+            </div>
+
+            <div class="code-block">
+              import javax.swing.*;
+
+              public class MinhaPrimeiraJanela {
+                public static void main(String[] args) {
+                  // Para segurança de thread em Swing
+                  SwingUtilities.invokeLater(() -> {
+                    // Cria uma janela
+                    JFrame janela = new JFrame("Olá Swing");
+
+                    // Define operação de fechamento
+                    janela.setDefaultCloseOperation(
+                    JFrame.EXIT_ON_CLOSE);
+
+                    // Define tamanho
+                    janela.setSize(400, 300);
+
+                    // Centraliza na tela
+                    janela.setLocationRelativeTo(null);
+
+                    // Torna visível
+                    janela.setVisible(true);
+                  });
+                }
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 13: Layout Managers -->
+    <div class="slide" id="slide-13">
+      <div class="slide-content">
+        <h2>Layout Managers</h2>
+        <p>Gerenciadores de layout controlam o posicionamento e o dimensionamento dos componentes.</p>
+
+        <div>
+          <div class="column">
+            <h3>Principais Layout Managers</h3>
+            <ul>
+              <li><strong>BorderLayout</strong>: divide em 5 regiões (North, South, East, West, Center)</li>
+              <li><strong>FlowLayout</strong>: organiza componentes em linha, da esquerda para a direita</li>
+              <li><strong>GridLayout</strong>: organiza em grade com linhas e colunas de mesmo tamanho</li>
+              <li><strong>BoxLayout</strong>: organiza componentes em linha horizontal ou vertical</li>
+              <li><strong>GridBagLayout</strong>: o mais flexível, mas também o mais complexo</li>
+            </ul>
+          </div>
+          <div class="column">
+            <div class="code-block">
+              JFrame janela = new JFrame("Exemplo de Layout");
+              janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+              janela.setSize(400, 300);
+
+              // Painel com BorderLayout (padrão para JFrame)
+              JPanel painelPrincipal = new JPanel();
+              painelPrincipal.setLayout(new BorderLayout(5, 5));
+
+              // Componentes em diferentes regiões
+              JButton btnNorte = new JButton("Norte");
+              JButton btnSul = new JButton("Sul");
+              JTextArea txtCentro = new JTextArea("Centro");
+
+              painelPrincipal.add(btnNorte, BorderLayout.NORTH);
+              painelPrincipal.add(btnSul, BorderLayout.SOUTH);
+              painelPrincipal.add(txtCentro, BorderLayout.CENTER);
+
+              janela.setContentPane(painelPrincipal);
+              janela.setVisible(true);
+            </div>
+          </div>
+        </div>
+
+        <div class="center-image">
+          <img src="https://examples.javacodegeeks.com/wp-content/uploads/2016/02/BorderLayout.jpg" alt="Exemplo de layouts" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 14: Componentes Básicos -->
+    <div class="slide" id="slide-14">
+      <div class="slide-content">
+        <h2>Componentes Básicos do Swing</h2>
+
+        <div>
+          <div class="column">
+            <h3>Componentes de Entrada</h3>
+            <ul>
+              <li><code>JTextField</code>: campo de texto de uma linha</li>
+              <li><code>JPasswordField</code>: campo para senhas</li>
+              <li><code>JTextArea</code>: área de texto multilinhas</li>
+              <li><code>JComboBox</code>: lista suspensa de opções</li>
+              <li><code>JCheckBox</code>: caixa de seleção</li>
+              <li><code>JRadioButton</code>: botão de opção (em grupo)</li>
+              <li><code>JSlider</code>: controle deslizante</li>
+            </ul>
+          </div>
+          <div class="column">
+            <h3>Componentes de Ação e Visualização</h3>
+            <ul>
+              <li><code>JButton</code>: botão clicável</li>
+              <li><code>JLabel</code>: texto e/ou imagem não editável</li>
+              <li><code>JList</code>: lista de itens selecionáveis</li>
+              <li><code>JTable</code>: dados em formato tabular</li>
+              <li><code>JTree</code>: dados em formato hierárquico</li>
+              <li><code>JProgressBar</code>: barra de progresso</li>
+              <li><code>JSplitPane</code>: divisão ajustável de painéis</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="center-image">
+          <img src="https://files.passeidireto.com/e03f8ece-361f-4473-b965-46553d45afe4/bg3.png" alt="Exemplos de componentes Swing" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 15: Tratamento de Eventos -->
+    <div class="slide" id="slide-15">
+      <div class="slide-content">
+        <h2>Tratamento de Eventos</h2>
+        <p>Interfaces gráficas são baseadas em eventos: responder a ações do usuário como cliques, digitação, etc.</p>
+
+        <h3>Principais tipos de listeners</h3>
+        <div>
+          <div class="column">
+            <ul>
+              <li><code>ActionListener</code>: para botões, menus, etc.</li>
+              <li><code>MouseListener</code>: para eventos de mouse</li>
+              <li><code>KeyListener</code>: para eventos de teclado</li>
+              <li><code>WindowListener</code>: para eventos da janela</li>
+              <li><code>FocusListener</code>: para ganho/perda de foco</li>
+            </ul>
+          </div>
+          <div class="column">
+            <div class="code-block">
+              // Usando classes anônimas (tradicional)
+              JButton btnSalvar = new JButton("Salvar");
+              btnSalvar.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                  System.out.println("Botão clicado!");
+                  // Lógica de salvamento
+                }
+              });
+
+              // Usando lambda (Java 8+)
+              JButton btnCancelar = new JButton("Cancelar");
+              btnCancelar.addActionListener(e -> {
+                System.out.println("Cancelado!");
+                // Lógica de cancelamento
+              });
+            </div>
+          </div>
+        </div>
+
+        <div class="note">
+          <strong>Dica:</strong> Para interfaces de listener com muitos métodos, considere usar classes adaptadoras como
+          <code>MouseAdapter</code>, <code>WindowAdapter</code>, etc., que fornecem implementações vazias de todos os
+          métodos.
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 16: Caixas de Diálogo -->
+    <div class="slide" id="slide-16">
+      <div class="slide-content">
+        <h2>Caixas de Diálogo</h2>
+
+        <p>O Swing oferece caixas de diálogo pré-definidas para interações comuns com o usuário:</p>
+
+        <div>
+          <div class="column">
+            <h3>JOptionPane</h3>
+            <ul>
+              <li><code>showMessageDialog</code>: exibe uma mensagem</li>
+              <li><code>showConfirmDialog</code>: pede confirmação (Sim/Não/Cancelar)</li>
+              <li><code>showInputDialog</code>: solicita entrada de texto</li>
+              <li><code>showOptionDialog</code>: oferece opções personalizadas</li>
+            </ul>
+
+            <h3>Diálogos de Arquivo</h3>
+            <ul>
+              <li><code>JFileChooser</code>: para seleção de arquivos</li>
+              <li><code>FileNameExtensionFilter</code>: filtro de tipos de arquivo</li>
+            </ul>
+          </div>
+          <div class="column">
+            <div class="code-block">
+              // Mensagem simples
+              JOptionPane.showMessageDialog(
+                null,
+                "Operação realizada com sucesso!",
+                "Informação",
+                JOptionPane.INFORMATION_MESSAGE
+              );
+
+              // Confirmação
+              int opcao = JOptionPane.showConfirmDialog(
+                null,
+                "Deseja salvar as alterações?",
+                "Confirmação",
+                JOptionPane.YES_NO_CANCEL_OPTION
+              );
+
+              // Seletor de arquivos
+              JFileChooser fileChooser = new JFileChooser();
+              fileChooser.setDialogTitle("Selecione um arquivo");
+
+              // Filtro para arquivos de texto
+              FileNameExtensionFilter filtro =
+              new FileNameExtensionFilter(
+              "Arquivos de texto (*.txt)", "txt");
+              fileChooser.addChoosableFileFilter(filtro);
+
+              int resultado = fileChooser.showOpenDialog(null);
+              if (resultado == JFileChooser.APPROVE_OPTION) {
+                File arquivoSelecionado =
+                fileChooser.getSelectedFile();
+                // Processar o arquivo
+              }
+            </div>
+          </div>
+        </div>
+
+        <div class="center-image">
+          <img src="https://ricardospinoza.wordpress.com/wp-content/uploads/2012/03/2012-03-15_165809.png" alt="Exemplos de caixas de diálogo" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 17: Projeto Integrado -->
+    <div class="slide" id="slide-17">
+      <div class="slide-content">
+        <h2>Projeto Integrado: Editor de Notas</h2>
+        <p>Vamos criar um exemplo que integra tratamento de exceções, manipulação de arquivos e interface Swing.</p>
+
+        <div class="code-block">
+          import javax.swing.*;
+          import java.awt.*;
+          import java.awt.event.*;
+          import java.io.*;
+
+          public class EditorDeNotas extends JFrame {
+            private JTextArea areaTexto;
+            private JFileChooser seletorArquivo;
+            private File arquivoAtual;
+
+            public EditorDeNotas() {
+              // Configuração da janela
+              super("Editor de Notas");
+              setSize(600, 400);
+              setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+              setLocationRelativeTo(null);
+
+              // Componentes
+              areaTexto = new JTextArea();
+              areaTexto.setFont(new Font("Monospaced", Font.PLAIN, 14));
+              JScrollPane scrollPane = new JScrollPane(areaTexto);
+
+              seletorArquivo = new JFileChooser();
+
+              // Menu
+              JMenuBar barraMenu = new JMenuBar();
+              JMenu menuArquivo = new JMenu("Arquivo");
+
+              JMenuItem itemNovo = new JMenuItem("Novo");
+              JMenuItem itemAbrir = new JMenuItem("Abrir");
+              JMenuItem itemSalvar = new JMenuItem("Salvar");
+              JMenuItem itemSair = new JMenuItem("Sair");
+
+              // Adiciona os itens ao menu
+              menuArquivo.add(itemNovo);
+              menuArquivo.add(itemAbrir);
+              menuArquivo.add(itemSalvar);
+              menuArquivo.addSeparator();
+              menuArquivo.add(itemSair);
+              barraMenu.add(menuArquivo);
+
+              // Listeners
+              itemNovo.addActionListener(e -> novoArquivo());
+              itemAbrir.addActionListener(e -> abrirArquivo());
+              itemSalvar.addActionListener(e -> salvarArquivo());
+              itemSair.addActionListener(e -> System.exit(0));
+
+              // Layout
+              setJMenuBar(barraMenu);
+              getContentPane().add(scrollPane, BorderLayout.CENTER);
+            }
+
+            private void novoArquivo() {
+              areaTexto.setText("");
+              arquivoAtual = null;
+              setTitle("Editor de Notas");
+            }
+
+            private void abrirArquivo() {
+              try {
+                int retorno = seletorArquivo.showOpenDialog(this);
+
+                if (retorno == JFileChooser.APPROVE_OPTION) {
+                  arquivoAtual = seletorArquivo.getSelectedFile();
+                  lerArquivo(arquivoAtual);
+                  setTitle("Editor de Notas - " + arquivoAtual.getName());
+                }
+              } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,
+                "Erro ao abrir arquivo: " + e.getMessage(),
+                "Erro", JOptionPane.ERROR_MESSAGE);
+              }
+            }
+
+            private void lerArquivo(File arquivo) {
+              try (BufferedReader reader = new BufferedReader(
+                new FileReader(arquivo))) {
+
+                StringBuilder conteudo = new StringBuilder();
+                String linha;
+
+                while ((linha = reader.readLine()) != null) {
+                  conteudo.append(linha).append("\n");
+                }
+
+                areaTexto.setText(conteudo.toString());
+
+              } catch (IOException e) {
+                throw new RuntimeException("Não foi possível ler o arquivo", e);
+              }
+            }
+
+            private void salvarArquivo() {
+              try {
+                if (arquivoAtual == null) {
+                  int retorno = seletorArquivo.showSaveDialog(this);
+
+                  if (retorno == JFileChooser.APPROVE_OPTION) {
+                  arquivoAtual = seletorArquivo.getSelectedFile();
+                  setTitle("Editor de Notas - " + arquivoAtual.getName());
+                  } else {
+                    return; // Usuário cancelou
+                  }
+                }
+
+                escreverArquivo(arquivoAtual);
+                JOptionPane.showMessageDialog(this,
+                "Arquivo salvo com sucesso!",
+                "Informação", JOptionPane.INFORMATION_MESSAGE);
+
+              } catch (Exception e) {
+                JOptionPane.showMessageDialog(this,
+                "Erro ao salvar arquivo: " + e.getMessage(),
+                "Erro", JOptionPane.ERROR_MESSAGE);
+              }
+            }
+
+            private void escreverArquivo(File arquivo) {
+              try (BufferedWriter writer = new BufferedWriter(
+              new FileWriter(arquivo))) {
+
+              writer.write(areaTexto.getText());
+
+              } catch (IOException e) {
+                throw new RuntimeException("Não foi possível salvar o arquivo", e);
+              }
+            }
+
+            public static void main(String[] args) {
+              SwingUtilities.invokeLater(() -> {
+                new EditorDeNotas().setVisible(true);
+              });
+            }
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 18: Boas Práticas -->
+    <div class="slide" id="slide-18">
+      <div class="slide-content">
+        <h2>Boas Práticas</h2>
+
+        <div>
+          <div class="column">
+            <h3>Tratamento de Exceções</h3>
+            <ul>
+              <li>Capture exceções específicas, não genéricas</li>
+              <li>Nunca deixe blocos catch vazios</li>
+              <li>Use try-with-resources para recursos</li>
+              <li>Registre informações úteis sobre a exceção</li>
+              <li>Não abuse de "throws Exception"</li>
+            </ul>
+
+            <h3>Manipulação de Arquivos</h3>
+            <ul>
+              <li>Sempre feche recursos após o uso</li>
+              <li>Trate exceções de I/O adequadamente</li>
+              <li>Verifique existência e permissões dos arquivos</li>
+              <li>Considere o encoding dos arquivos de texto</li>
+            </ul>
+          </div>
+          <div class="column">
+            <h3>Interface Gráfica Swing</h3>
+            <ul>
+              <li>Use o Event Dispatch Thread (EDT)</li>
+              <li>Separe a lógica da interface (MVC)</li>
+              <li>Evite operações demoradas na thread da GUI</li>
+              <li>Use layout managers em vez de posições absolutas</li>
+              <li>Forneça feedback visual para operações longas</li>
+              <li>Mantenha a interface intuitiva e responsiva</li>
+            </ul>
+
+            <div class="warning">
+              <strong>SwingWorker:</strong> Para operações demoradas como acesso a arquivos grandes ou operações de
+              rede, use a classe <code>SwingWorker</code> para executar em segundo plano sem bloquear a interface.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 19: Resumo -->
+    <div class="slide" id="slide-19">
+      <div class="slide-content">
+        <h2>Resumo</h2>
+
+        <h3>Tratamento de Exceções</h3>
+        <ul>
+          <li>Blocos try-catch para tratamento de erros</li>
+          <li>Checked vs. Unchecked exceptions</li>
+          <li>Try-with-resources para gerenciamento automático de recursos</li>
+          <li>Exceções personalizadas para representar erros de domínio</li>
+        </ul>
+
+        <h3>Gerenciamento de Arquivos</h3>
+        <ul>
+          <li>Classes java.io e java.nio para operações com arquivos</li>
+          <li>Leitura e escrita de texto e dados binários</li>
+          <li>Serialização para salvar objetos em disco</li>
+        </ul>
+
+        <h3>Interface Gráfica Swing</h3>
+        <ul>
+          <li>Componentes visuais para interação com o usuário</li>
+          <li>Layout managers para organização da interface</li>
+          <li>Tratamento de eventos para responder a ações do usuário</li>
+          <li>Diálogos para interações comuns</li>
+        </ul>
+
+        <div class="note">
+          <strong>Integração:</strong> Juntos, esses elementos permitem criar aplicações robustas com interfaces
+          gráficas que podem persistir dados e tratar de forma elegante situações de erro.
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 20: Referências -->
+    <div class="slide" id="slide-20">
+      <div class="slide-content">
+        <h2>Referências</h2>
+
+        <h3>Documentação Oficial</h3>
+        <ul>
+          <li>Java Platform SE Documentation: <a href="#">https://docs.oracle.com/javase/</a></li>
+          <li>The Java Tutorials: <a href="#">https://docs.oracle.com/javase/tutorial/</a></li>
+        </ul>
+
+        <h3>Livros Recomendados</h3>
+        <ul>
+          <li>Deitel, H. M. & Deitel, P. J. "Java: Como Programar"</li>
+          <li>Sierra, K. & Bates, B. "Use a Cabeça! Java"</li>
+          <li>Horstmann, C. "Core Java"</li>
+          <li>Bloch, J. "Java Efetivo"</li>
+        </ul>
+
+        <h3>Recursos Online</h3>
+        <ul>
+          <li>Baeldung: <a href="#">https://www.baeldung.com/</a></li>
+          <li>Jenkov Tutorials: <a href="#">http://tutorials.jenkov.com/</a></li>
+          <li>StackOverflow: <a href="#">https://stackoverflow.com/</a></li>
+        </ul>
+
+        <div style="text-align: center; margin-top: 40px;">
+          <h3>Obrigado!</h3>
+          <p>Alguma pergunta?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controles de Navegação -->
+    <div class="controls">
+      <button id="prev-slide">Anterior</button>
+      <button id="next-slide">Próximo</button>
+      <div id="slide-counter">Slide 1 de 20</div>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript para controlar a navegação entre slides
+    document.addEventListener('DOMContentLoaded', function () {
+      const slides = document.querySelectorAll('.slide');
+      let currentSlide = 0;
+
+      const prevBtn = document.getElementById('prev-slide');
+      const nextBtn = document.getElementById('next-slide');
+      const counter = document.getElementById('slide-counter');
+
+      // Esconde todos os slides exceto o atual
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          if (i === index) slide.style.display = 'block';
+          else slide.style.display = 'none';
+        });
+
+        // Atualiza o contador
+        counter.textContent = `Slide ${index + 1} de ${slides.length}`;
+
+        // Atualiza estado dos botões
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === slides.length - 1;
+      }
+
+      // Mostra o primeiro slide inicialmente
+      showSlide(currentSlide);
+
+      // Adiciona listeners para os botões
+      prevBtn.addEventListener('click', function () {
+        if (currentSlide > 0) {
+          currentSlide--;
+          showSlide(currentSlide);
+        }
+      });
+
+      nextBtn.addEventListener('click', function () {
+        if (currentSlide < slides.length - 1) {
+          currentSlide++;
+          showSlide(currentSlide);
+        }
+      });
+
+      // Adiciona navegação pelo teclado
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft' && currentSlide > 0) {
+          currentSlide--;
+          showSlide(currentSlide);
+        } else if (e.key === 'ArrowRight' && currentSlide < slides.length - 1) {
+          currentSlide++;
+          showSlide(currentSlide);
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
